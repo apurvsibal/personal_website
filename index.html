@@ -165,6 +165,8 @@
         }
         
         .job-responsibilities li:last-child {
+            margin-bottom: 0;
+        }
         
         .skills {
             margin-bottom: 80px;
@@ -278,7 +280,33 @@
         .certifications h3 {
             font-size: 16px;
             font-weight: 500;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+        
+        .certifications ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .certifications li {
+            font-size: 14px;
+            color: #4a4a4a;
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .certifications li:before {
+            content: "•";
+            color: #999;
+            position: absolute;
+            left: 0;
+        }
+        
+        .certifications li:last-child {
             margin-bottom: 0;
+        }
         
         .posts {
             margin-bottom: 80px;
@@ -442,6 +470,23 @@
             .social-links a {
                 margin: 0 12px;
             }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .company-period {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+            
+            .institution-year {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
         }
     </style>
 </head>
@@ -461,6 +506,56 @@
             </section>
 
             <section class="experience">
+                <h2>Professional Experience</h2>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <h3>Senior Product Manager</h3>
+                        <div class="company-period">
+                            <span class="company">Amazon Web Services (AWS)</span>
+                            <span class="period">2021 - Present</span>
+                        </div>
+                    </div>
+                    <ul class="job-responsibilities">
+                        <li>Lead product strategy and roadmap for AI/ML services serving 100M+ monthly active users</li>
+                        <li>Drive cross-functional collaboration with engineering, design, and business teams across 5+ time zones</li>
+                        <li>Launched 3 major AI features that increased customer engagement by 40% and revenue by $25M annually</li>
+                        <li>Manage product lifecycle from ideation to launch, including market research, competitive analysis, and go-to-market strategy</li>
+                    </ul>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <h3>Product Manager</h3>
+                        <div class="company-period">
+                            <span class="company">Microsoft Azure</span>
+                            <span class="period">2019 - 2021</span>
+                        </div>
+                    </div>
+                    <ul class="job-responsibilities">
+                        <li>Managed cloud infrastructure products with focus on scalability and performance optimization</li>
+                        <li>Collaborated with enterprise customers to understand requirements and drive product improvements</li>
+                        <li>Led product launches that resulted in 60% increase in customer adoption within first year</li>
+                        <li>Developed comprehensive go-to-market strategies for new cloud services</li>
+                    </ul>
+                </div>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <h3>Associate Product Manager</h3>
+                        <div class="company-period">
+                            <span class="company">Google Cloud Platform</span>
+                            <span class="period">2017 - 2019</span>
+                        </div>
+                    </div>
+                    <ul class="job-responsibilities">
+                        <li>Supported development of enterprise cloud solutions for Fortune 500 companies</li>
+                        <li>Conducted user research and data analysis to inform product decisions</li>
+                        <li>Collaborated with engineering teams to define technical requirements and specifications</li>
+                        <li>Assisted in product launches and customer onboarding processes</li>
+                    </ul>
+                </div>
+            </section>
 
             <section class="skills">
                 <h2>Skills & Expertise</h2>
@@ -486,6 +581,14 @@
                     <div class="skill-category">
                         <h3>Leadership</h3>
                         <ul>
+                            <li>Team Leadership & Mentoring</li>
+                            <li>Stakeholder Management</li>
+                            <li>Strategic Planning</li>
+                            <li>Cross-functional Collaboration</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
             <section class="education">
                 <h2>Education & Certifications</h2>
@@ -511,50 +614,17 @@
                     </div>
                     <p class="education-details">Magna Cum Laude, Focus on Artificial Intelligence and Machine Learning</p>
                 </div>
-                <h2>Professional Experience</h2>
                 
-                <div class="job">
-                    <div class="job-header">
-                        <h3>Senior Product Manager</h3>
-                        <div class="company-period">
-                            <span class="company">Amazon Web Services (AWS)</span>
-                            <span class="period">2021 - Present</span>
-            
-            .skills-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            
-            .company-period {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
-            }
-            
-            .institution-year {
-                flex-direction: column;
-                align-items: flex-start;
-                        </div>
-                    </div>
-                    <ul class="job-responsibilities">
-                        <li>Lead product strategy and roadmap for AI/ML services serving 100M+ monthly active users</li>
-                        <li>Drive cross-functional collaboration with engineering, design, and business teams across 5+ time zones</li>
-                        <li>Launched 3 major AI features that increased customer engagement by 40% and revenue by $25M annually</li>
-                        <li>Manage product lifecycle from ideation to launch, including market research, competitive analysis, and go-to-market strategy</li>
+                <div class="certifications">
+                    <h3>Professional Certifications</h3>
+                    <ul>
+                        <li>AWS Solutions Architect Professional</li>
+                        <li>Certified Scrum Product Owner (CSPO)</li>
+                        <li>Google Cloud Professional Cloud Architect</li>
+                        <li>Microsoft Azure Solutions Architect Expert</li>
                     </ul>
                 </div>
-                
-                <div class="job">
-                    <div class="job-header">
-                        <h3>Product Manager</h3>
-                        <div class="company-period">
-                            <span class="company">Microsoft Azure</span>
-                            <span class="period">2019 - 2021</span>
-                        </div>
-                    </div>
-                    <ul class="job-responsibilities">
-                        <li>Managed cloud infrastructure products with focus on scalability and performance optimization</li>
-                        <li>Collaborated with enterprise customers to understand requirements and drive product improvements</li>
-                        <li>Led product launches that resulted in 60% increase in customer adoption within first year</li>
+            </section>
 
             <section class="topics">
                 <h2>Topics I Write About</h2>
