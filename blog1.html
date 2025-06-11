@@ -3,14 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Post 1</title>
+    <title>Blog Post 1 - Personal Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            padding: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+            margin-bottom: 5rem;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #333;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #d0d0d0;
+        }
+        .blog-meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 1rem;
+        }
+        .blog-content {
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Blog Post Title</h1>
+        <h1>My First Blog Post</h1>
     </header>
     <main>
-        <p>This is where your blog content goes...</p>
+        <a href="index.html" class="back-link">← Back to Home</a>
+        
+        <div class="blog-meta">
+            <p>Published on: June 11, 2025 | By: Apurv Sibal</p>
+        </div>
+        
+        <div class="blog-content">
+            <h2>Welcome to My Blog Journey</h2>
+            <p>This is my first blog post on my personal website! As a Senior Product Manager at AWS, I'm excited to share my thoughts and experiences about AI, product management, and life in general.</p>
+            
+            <h3>What You Can Expect</h3>
+            <p>In future posts, I'll be covering:</p>
+            <ul>
+                <li>AI trends and their impact on product development</li>
+                <li>Product management best practices</li>
+                <li>Career insights and professional growth</li>
+                <li>Personal reflections and life lessons</li>
+            </ul>
+            
+            <h3>Stay Connected</h3>
+            <p>I'm looking forward to building a community of readers who are passionate about technology and innovation. Don't forget to subscribe to my newsletter on the home page to stay updated with my latest posts!</p>
+            
+            <p>Thank you for visiting, and I hope you find value in the content I'll be sharing.</p>
+        </div>
     </main>
     <footer>
         <p>&copy; 2024 Apurv Sibal. All rights reserved.</p>
