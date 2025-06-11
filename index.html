@@ -3,315 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apurv Sibal - Personal Blog</title>
+    <title>Apurv Sibal</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            line-height: 1.6;
-            color: #333;
+            box-sizing: border-box;
         }
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            padding: 2rem 1rem;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: #2c2c2c;
+            background-color: #ffffff;
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            font-weight: 300;
-        }
-        header p {
-            margin: 0.5rem 0 0 0;
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
+        
         .container {
-            max-width: 1200px;
+            max-width: 680px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 20px;
         }
+        
+        header {
+            padding: 60px 0 40px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        
+        header p {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+        
         main {
-            padding: 2rem 0;
+            padding: 60px 0;
         }
-        .hero-section {
-            background: #fff;
-            padding: 3rem 2rem;
-            margin: 2rem 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            text-align: center;
+        
+        .intro {
+            margin-bottom: 80px;
         }
-        .hero-section h2 {
-            color: #2c3e50;
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        
+        .intro h2 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #1a1a1a;
         }
-        .hero-section p {
-            font-size: 1.1rem;
-            color: #555;
-            max-width: 800px;
-            margin: 0 auto 2rem auto;
+        
+        .intro p {
+            font-size: 16px;
+            color: #4a4a4a;
+            margin-bottom: 16px;
         }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+        
+        .topics {
+            margin-bottom: 80px;
         }
-        .feature-card {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        
+        .topics h2 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            color: #1a1a1a;
         }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        
+        .topic-list {
+            list-style: none;
         }
-        .feature-card h3 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
+        
+        .topic-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 15px;
+            color: #4a4a4a;
         }
-        .feature-card p {
-            color: #666;
-            margin-bottom: 1rem;
+        
+        .topic-list li:last-child {
+            border-bottom: none;
         }
-        .feature-card ul {
-            color: #666;
-            padding-left: 1.2rem;
+        
+        .posts {
+            margin-bottom: 80px;
         }
-        .feature-card li {
-            margin-bottom: 0.5rem;
+        
+        .posts h2 {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 32px;
+            color: #1a1a1a;
         }
-        .blog-section {
-            background: #fff;
-            padding: 3rem 2rem;
-            margin: 2rem 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        
+        .post {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid #f0f0f0;
         }
-        .blog-section h2 {
-            color: #2c3e50;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
+        
+        .post:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
-        .blog-post {
-            border-left: 4px solid #667eea;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            background: #f8f9fa;
-            border-radius: 0 8px 8px 0;
-            transition: background-color 0.3s ease;
+        
+        .post-date {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .blog-post:hover {
-            background: #e9ecef;
+        
+        .post h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 8px;
         }
-        .blog-post h3 {
-            margin: 0 0 0.5rem 0;
-            color: #2c3e50;
-        }
-        .blog-post a {
-            color: #667eea;
+        
+        .post h3 a {
+            color: #1a1a1a;
             text-decoration: none;
+        }
+        
+        .post h3 a:hover {
+            color: #666;
+        }
+        
+        .post-excerpt {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .newsletter {
+            background-color: #fafafa;
+            padding: 40px;
+            border: 1px solid #e5e5e5;
+            margin-bottom: 60px;
+        }
+        
+        .newsletter h2 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+        
+        .newsletter p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+        
+        .newsletter form {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .newsletter input[type="email"] {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            background-color: #fff;
+        }
+        
+        .newsletter input[type="email"]:focus {
+            outline: none;
+            border-color: #999;
+        }
+        
+        .newsletter button {
+            padding: 12px 24px;
+            background-color: #1a1a1a;
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
             font-weight: 500;
         }
-        .blog-post a:hover {
-            text-decoration: underline;
+        
+        .newsletter button:hover {
+            background-color: #333;
         }
-        .blog-post .date {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-        .blog-post .excerpt {
-            color: #555;
-            margin: 0;
-        }
-        .subscribe {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            padding: 3rem 2rem;
-            margin: 3rem 0;
-            border-radius: 12px;
-            text-align: center;
-        }
-        .subscribe h2 {
-            margin: 0 0 1rem 0;
-            font-size: 2rem;
-        }
-        .subscribe p {
-            margin: 0 0 2rem 0;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        .subscribe form {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .subscribe input[type="email"] {
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            min-width: 300px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .subscribe button {
-            padding: 1rem 2rem;
-            background: #fff;
-            color: #667eea;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .subscribe button:hover {
-            background: #f8f9fa;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
+        
         footer {
-            background-color: #2c3e50;
-            color: #fff;
+            border-top: 1px solid #e5e5e5;
+            padding: 40px 0;
             text-align: center;
-            padding: 2rem 1rem;
-            margin-top: 4rem;
         }
-        footer p {
-            margin: 0;
-            opacity: 0.8;
-        }
+        
         .social-links {
-            margin: 1rem 0;
+            margin-bottom: 20px;
         }
+        
         .social-links a {
-            color: #fff;
+            color: #666;
             text-decoration: none;
-            margin: 0 1rem;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
+            margin: 0 16px;
+            font-size: 14px;
         }
+        
         .social-links a:hover {
-            opacity: 1;
+            color: #1a1a1a;
         }
+        
+        footer p {
+            font-size: 13px;
+            color: #999;
+        }
+        
         @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            header {
+                padding: 40px 0 30px;
+            }
+            
             header h1 {
-                font-size: 2rem;
+                font-size: 28px;
             }
-            header p {
-                font-size: 1rem;
+            
+            main {
+                padding: 40px 0;
             }
-            .hero-section {
-                padding: 2rem 1rem;
+            
+            .intro, .topics, .posts {
+                margin-bottom: 60px;
             }
-            .hero-section h2 {
-                font-size: 1.5rem;
+            
+            .newsletter {
+                padding: 30px 20px;
             }
-            .features {
-                grid-template-columns: 1fr;
-            }
-            .subscribe input[type="email"] {
-                min-width: 250px;
-            }
-            .subscribe form {
+            
+            .newsletter form {
                 flex-direction: column;
-                align-items: center;
+            }
+            
+            .social-links a {
+                margin: 0 12px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Apurv Sibal</h1>
-            <p>Senior Product Manager at AWS | AI Enthusiast | Thought Leader</p>
-        </div>
-    </header>
-    
     <div class="container">
+        <header>
+            <h1>Apurv Sibal</h1>
+            <p>Senior Product Manager at AWS</p>
+        </header>
+        
         <main>
-            <section class="hero-section">
-                <h2>Welcome to My Digital Space</h2>
-                <p>Hi there! I'm Apurv Sibal, a Senior Product Manager at Amazon Web Services (AWS), where I work at the intersection of artificial intelligence and cloud computing. This blog is my platform to share insights, experiences, and thoughts on AI, product management, technology trends, and the journey of building innovative solutions that impact millions of users worldwide.</p>
+            <section class="intro">
+                <h2>About</h2>
+                <p>I'm a Senior Product Manager at Amazon Web Services, working at the intersection of artificial intelligence and cloud computing. This is where I share insights on AI, product management, and technology trends.</p>
             </section>
 
-            <div class="features">
-                <div class="feature-card">
-                    <h3>🚀 Product Management Insights</h3>
-                    <p>Dive deep into the world of product management with real-world experiences from AWS:</p>
-                    <ul>
-                        <li>Strategic product planning and roadmap development</li>
-                        <li>Customer-centric product design principles</li>
-                        <li>Cross-functional team leadership</li>
-                        <li>Data-driven decision making</li>
-                        <li>Scaling products for enterprise customers</li>
-                    </ul>
-                </div>
-                
-                <div class="feature-card">
-                    <h3>🤖 AI & Technology Trends</h3>
-                    <p>Explore the latest developments in artificial intelligence and emerging technologies:</p>
-                    <ul>
-                        <li>Machine learning and deep learning applications</li>
-                        <li>AI ethics and responsible AI development</li>
-                        <li>Cloud computing and AI infrastructure</li>
-                        <li>Industry transformation through AI</li>
-                        <li>Future of work in the AI era</li>
-                    </ul>
-                </div>
-                
-                <div class="feature-card">
-                    <h3>💡 Career & Leadership</h3>
-                    <p>Personal reflections and advice on professional growth and leadership:</p>
-                    <ul>
-                        <li>Career transitions and growth strategies</li>
-                        <li>Building high-performing teams</li>
-                        <li>Work-life balance in tech</li>
-                        <li>Continuous learning and skill development</li>
-                        <li>Networking and relationship building</li>
-                    </ul>
-                </div>
-            </div>
+            <section class="topics">
+                <h2>Topics I Write About</h2>
+                <ul class="topic-list">
+                    <li>Product Management & Strategy</li>
+                    <li>Artificial Intelligence & Machine Learning</li>
+                    <li>Cloud Computing & Infrastructure</li>
+                    <li>Career Development & Leadership</li>
+                    <li>Technology Trends & Innovation</li>
+                </ul>
+            </section>
 
-            <section class="blog-section">
-                <h2>Latest Blog Posts</h2>
+            <section class="posts">
+                <h2>Recent Posts</h2>
                 
-                <article class="blog-post">
-                    <div class="date">June 11, 2025</div>
+                <article class="post">
+                    <div class="post-date">June 11, 2025</div>
                     <h3><a href="blog2.html">The Approaching Singularity: Reflections on Sam Altman's Vision</a></h3>
-                    <p class="excerpt">Exploring the implications of Sam Altman's recent thoughts on the technological singularity and what it means for AI development, product management, and humanity's future. A deep dive into the Intelligence Age and how we can prepare for this transformative period.</p>
+                    <p class="post-excerpt">Exploring the implications of Sam Altman's recent thoughts on the technological singularity and what it means for AI development, product management, and humanity's future.</p>
                 </article>
                 
-                <article class="blog-post">
-                    <div class="date">June 11, 2025</div>
+                <article class="post">
+                    <div class="post-date">June 11, 2025</div>
                     <h3><a href="blog1.html">Welcome to My Blog Journey</a></h3>
-                    <p class="excerpt">My first blog post introducing this platform and what you can expect from future content. Join me as I share insights from my experience as a Senior Product Manager at AWS, covering AI trends, product management best practices, and personal reflections on the tech industry.</p>
+                    <p class="post-excerpt">My first blog post introducing this platform and what you can expect from future content. Insights from my experience as a Senior Product Manager at AWS.</p>
                 </article>
-                
-                <div style="text-align: center; margin-top: 2rem; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
-                    <p style="color: #666; font-style: italic; margin: 0;">More exciting content coming soon! Subscribe below to be notified when new posts are published.</p>
-                </div>
             </section>
 
-            <section class="subscribe">
-                <h2>Stay Connected</h2>
-                <p>Join my newsletter to receive the latest insights on AI, product management, and technology trends directly in your inbox. No spam, just valuable content delivered weekly.</p>
+            <section class="newsletter">
+                <h2>Stay Updated</h2>
+                <p>Get notified when I publish new posts about AI, product management, and technology.</p>
                 <form action="https://formspree.io/f/xzzprann" method="POST">
-                    <input type="email" name="_replyto" placeholder="Enter your email address" required>
-                    <button type="submit">Subscribe Now</button>
+                    <input type="email" name="_replyto" placeholder="your@email.com" required>
+                    <button type="submit">Subscribe</button>
                 </form>
             </section>
         </main>
@@ -324,7 +312,7 @@
                 <a href="#" aria-label="Twitter">Twitter</a>
                 <a href="#" aria-label="GitHub">GitHub</a>
             </div>
-            <p>&copy; 2025 Apurv Sibal. All rights reserved. Built with passion for sharing knowledge and insights.</p>
+            <p>&copy; 2025 Apurv Sibal</p>
         </div>
     </footer>
 </body>
