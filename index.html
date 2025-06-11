@@ -89,83 +89,6 @@
             border-bottom: none;
         }
         
-        .experience {
-            margin-bottom: 80px;
-        }
-        
-        .experience h2 {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 32px;
-            color: #1a1a1a;
-        }
-        
-        .job {
-            margin-bottom: 40px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .job:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .job-header {
-            margin-bottom: 16px;
-        }
-        
-        .job h3 {
-            font-size: 18px;
-            font-weight: 500;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
-        
-        .company-period {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .company {
-            font-size: 15px;
-            color: #666;
-            font-weight: 500;
-        }
-        
-        .period {
-            font-size: 13px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .job-responsibilities {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .job-responsibilities li {
-            font-size: 15px;
-            color: #4a4a4a;
-            margin-bottom: 8px;
-            padding-left: 16px;
-            position: relative;
-        }
-        
-        .job-responsibilities li:before {
-            content: "•";
-            color: #999;
-            position: absolute;
-            left: 0;
-        }
-        
-        .job-responsibilities li:last-child {
-        
         .skills {
             margin-bottom: 80px;
         }
@@ -274,11 +197,6 @@
             color: #4a4a4a;
             margin: 0;
         }
-        
-        .certifications h3 {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 0;
         
         .posts {
             margin-bottom: 80px;
@@ -427,7 +345,7 @@
                 padding: 40px 0;
             }
             
-            .intro, .experience, .skills, .education, .topics, .posts {
+            .intro, .skills, .education, .topics, .posts {
                 margin-bottom: 60px;
             }
             
@@ -441,6 +359,17 @@
             
             .social-links a {
                 margin: 0 12px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .institution-year {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
             }
         }
     </style>
@@ -459,8 +388,6 @@
                 <p>My passion lies at the intersection of artificial intelligence, cloud computing, and product strategy. I've led cross-functional teams to deliver innovative products that have generated significant business impact and enhanced customer experiences across diverse industries.</p>
                 <p>This is where I share insights on AI, product management, technology trends, and lessons learned from building products at scale.</p>
             </section>
-
-            <section class="experience">
 
             <section class="skills">
                 <h2>Skills & Expertise</h2>
@@ -486,6 +413,14 @@
                     <div class="skill-category">
                         <h3>Leadership</h3>
                         <ul>
+                            <li>Cross-functional Team Leadership</li>
+                            <li>Stakeholder Management</li>
+                            <li>Strategic Planning</li>
+                            <li>Mentoring & Coaching</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
             <section class="education">
                 <h2>Education & Certifications</h2>
@@ -511,50 +446,7 @@
                     </div>
                     <p class="education-details">Magna Cum Laude, Focus on Artificial Intelligence and Machine Learning</p>
                 </div>
-                <h2>Professional Experience</h2>
-                
-                <div class="job">
-                    <div class="job-header">
-                        <h3>Senior Product Manager</h3>
-                        <div class="company-period">
-                            <span class="company">Amazon Web Services (AWS)</span>
-                            <span class="period">2021 - Present</span>
-            
-            .skills-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            
-            .company-period {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
-            }
-            
-            .institution-year {
-                flex-direction: column;
-                align-items: flex-start;
-                        </div>
-                    </div>
-                    <ul class="job-responsibilities">
-                        <li>Lead product strategy and roadmap for AI/ML services serving 100M+ monthly active users</li>
-                        <li>Drive cross-functional collaboration with engineering, design, and business teams across 5+ time zones</li>
-                        <li>Launched 3 major AI features that increased customer engagement by 40% and revenue by $25M annually</li>
-                        <li>Manage product lifecycle from ideation to launch, including market research, competitive analysis, and go-to-market strategy</li>
-                    </ul>
-                </div>
-                
-                <div class="job">
-                    <div class="job-header">
-                        <h3>Product Manager</h3>
-                        <div class="company-period">
-                            <span class="company">Microsoft Azure</span>
-                            <span class="period">2019 - 2021</span>
-                        </div>
-                    </div>
-                    <ul class="job-responsibilities">
-                        <li>Managed cloud infrastructure products with focus on scalability and performance optimization</li>
-                        <li>Collaborated with enterprise customers to understand requirements and drive product improvements</li>
-                        <li>Led product launches that resulted in 60% increase in customer adoption within first year</li>
+            </section>
 
             <section class="topics">
                 <h2>Topics I Write About</h2>
