@@ -117,7 +117,7 @@ A standalone HTML file that can be opened directly in a browser to test the blog
 # Install dependencies
 npm install
 
-# Run all tests (both index.html and blog1.html)
+# Run all tests (index.html, blog1.html, and blog2.html)
 npm test
 
 # Run tests with coverage
