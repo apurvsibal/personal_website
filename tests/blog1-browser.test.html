@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog1.html Unit Tests - Browser Version</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .test-summary {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #666;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog1.html Unit Tests</h1>
+    <div id="test-results"></div>
+    
+    <!-- Hidden iframe to load the blog1.html for testing -->
+    <iframe id="test-frame" src="../blog1.html" style="display: none;"></iframe>
+
+    <script>
+        class TestRunner {
+            constructor() {
+                this.tests = [];
+                this.passed = 0;
+                this.failed = 0;
+                this.resultsContainer = document.getElementById('test-results');
+            }
+
+            test(description, testFunction) {
+                this.tests.push({ description, testFunction });
+            }
+
+            async runTests() {
+                // Wait for iframe to load
+                await new Promise(resolve => {
+                    const iframe = document.getElementById('test-frame');
+                    iframe.onload = resolve;
+                });
+
+                const testDoc = document.getElementById('test-frame').contentDocument;
+                
+                for (const test of this.tests) {
+                    try {
+                        const result = test.testFunction(testDoc);
+                        this.addResult(test.description, true, result);
+                        this.passed++;
+                    } catch (error) {
+                        this.addResult(test.description, false, error.message);
+                        this.failed++;
+                    }
+                }
+
+                this.showSummary();
+            }
+
+            addResult(description, passed, message = '') {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `test-result ${passed ? 'pass' : 'fail'}`;
+                resultDiv.innerHTML = `
+                    <strong>${passed ? '✓' : '✗'} ${description}</strong>
+                    ${message ? `<br><small>${message}</small>` : ''}
+                `;
+                this.resultsContainer.appendChild(resultDiv);
+            }
+
+            showSummary() {
+                const summaryDiv = document.createElement('div');
+                summaryDiv.className = 'test-summary';
+                summaryDiv.innerHTML = `
+                    Test Summary: ${this.passed} passed, ${this.failed} failed, ${this.tests.length} total
+                `;
+                this.resultsContainer.insertBefore(summaryDiv, this.resultsContainer.firstChild);
+            }
+        }
+
+        const runner = new TestRunner();
+
+        // HTML Structure Tests
+        runner.test('Should have proper DOCTYPE and HTML structure', (doc) => {
+            const html = doc.documentElement;
+            if (!html || html.getAttribute('lang') !== 'en') {
+                throw new Error('HTML element missing or lang attribute incorrect');
+            }
+            return 'HTML structure is valid';
+        });
+
+        runner.test('Should have proper meta tags', (doc) => {
+            const charset = doc.querySelector('meta[charset="UTF-8"]');
+            const viewport = doc.querySelector('meta[name="viewport"]');
+            if (!charset || !viewport) {
+                throw new Error('Required meta tags are missing');
+            }
+            return 'Meta tags are present and correct';
+        });
+
+        runner.test('Should have correct title', (doc) => {
+            const title = doc.querySelector('title');
+            if (!title || title.textContent !== 'Welcome to My Blog Journey - Apurv Sibal') {
+                throw new Error(`Expected title "Welcome to My Blog Journey - Apurv Sibal", got "${title?.textContent}"`);
+            }
+            return 'Title is correct';
+        });
+
+        // Header Tests
+        runner.test('Should have header with back link', (doc) => {
+            const backLink = doc.querySelector('.back-link');
+            if (!backLink || backLink.getAttribute('href') !== 'index.html') {
+                throw new Error('Back link is missing or has incorrect href');
+            }
+            if (backLink.textContent !== 'Back to Home') {
+                throw new Error('Back link text is incorrect');
+            }
+            return 'Back link is correct';
+        });
+
+        runner.test('Should have proper blog post title', (doc) => {
+            const h1 = doc.querySelector('header h1');
+            if (!h1 || h1.textContent !== 'Welcome to My Blog Journey') {
+                throw new Error('Blog post title is incorrect or missing');
+            }
+            return 'Blog post title is correct';
+        });
+
+        runner.test('Should have meta information with date and author', (doc) => {
+            const meta = doc.querySelector('.meta');
+            if (!meta || !meta.textContent.includes('June 11, 2025') || !meta.textContent.includes('Apurv Sibal')) {
+                throw new Error('Meta information is missing or incorrect');
+            }
+            return 'Meta information is correct';
+        });
+
+        // Content Tests
+        runner.test('Should have main content area', (doc) => {
+            const main = doc.querySelector('main');
+            const content = main?.querySelector('.content');
+            if (!main || !content) {
+                throw new Error('Main content area is missing');
+            }
+            return 'Main content area is present';
+        });
+
+        runner.test('Should have introductory paragraph', (doc) => {
+            const content = doc.querySelector('.content');
+            const firstParagraph = content?.querySelector('p');
+            if (!firstParagraph || !firstParagraph.textContent.includes('This is my first blog post')) {
+                throw new Error('Introductory paragraph is missing or incorrect');
+            }
+            return 'Introductory paragraph is correct';
+        });
+
+        runner.test('Should have "What You Can Expect" section', (doc) => {
+            const headings = doc.querySelectorAll('h3');
+            const expectationHeading = Array.from(headings).find(h => h.textContent === 'What You Can Expect');
+            if (!expectationHeading) {
+                throw new Error('"What You Can Expect" section is missing');
+            }
+            return '"What You Can Expect" section is present';
+        });
+
+        runner.test('Should have list of future topics', (doc) => {
+            const list = doc.querySelector('.content ul');
+            const listItems = list?.querySelectorAll('li');
+            if (!list || listItems?.length !== 4) {
+                throw new Error(`Expected 4 list items, found ${listItems?.length || 0}`);
+            }
+            
+            const expectedTopics = [
+                'AI trends and their impact on product development',
+                'Product management best practices',
+                'Career insights and professional growth',
+                'Personal reflections and life lessons'
+            ];
+            
+            for (let i = 0; i < listItems.length; i++) {
+                if (listItems[i].textContent !== expectedTopics[i]) {
+                    throw new Error(`List item ${i + 1} content is incorrect`);
+                }
+            }
+            return 'Future topics list is correct';
+        });
+
+        runner.test('Should have "Stay Connected" section', (doc) => {
+            const headings = doc.querySelectorAll('h3');
+            const stayConnectedHeading = Array.from(headings).find(h => h.textContent === 'Stay Connected');
+            if (!stayConnectedHeading) {
+                throw new Error('"Stay Connected" section is missing');
+            }
+            return '"Stay Connected" section is present';
+        });
+
+        runner.test('Should mention newsletter subscription', (doc) => {
+            const content = doc.querySelector('.content');
+            const textContent = content?.textContent.toLowerCase();
+            if (!textContent?.includes('newsletter') || !textContent?.includes('subscribe')) {
+                throw new Error('Newsletter subscription mention is missing');
+            }
+            return 'Newsletter subscription is mentioned';
+        });
+
+        // Footer Tests
+        runner.test('Should have footer with copyright', (doc) => {
+            const footer = doc.querySelector('footer');
+            const copyright = footer?.querySelector('p');
+            if (!footer || !copyright || copyright.textContent !== '© 2025 Apurv Sibal') {
+                throw new Error('Footer copyright is missing or incorrect');
+            }
+            return 'Footer copyright is correct';
+        });
+
+        // Professional Content Tests
+        runner.test('Should contain key professional information', (doc) => {
+            const content = doc.querySelector('.content');
+            const textContent = content?.textContent;
+            if (!textContent?.includes('Senior Product Manager at AWS') || 
+                !textContent?.includes('AI') || 
+                !textContent?.includes('product management')) {
+                throw new Error('Key professional information is missing');
+            }
+            return 'Professional information is present';
+        });
+
+        // Run all tests when page loads
+        window.addEventListener('load', () => {
+            runner.runTests();
+        });
+    </script>
+</body>
+</html>
