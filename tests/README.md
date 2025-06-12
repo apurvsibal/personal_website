@@ -1,6 +1,6 @@
 # Unit Tests for Personal Website
 
-This directory contains comprehensive unit tests for Apurv Sibal's personal website, including tests for `index.html` and `blog1.html`.
+This directory contains comprehensive unit tests for Apurv Sibal's personal website, including tests for `index.html`, `blog1.html`, and `blog2.html`.
 
 ## Overview
 
@@ -25,6 +25,16 @@ Standalone HTML file for testing the homepage directly in a browser.
 Comprehensive test suite for the "Welcome to My Blog Journey" blog post using Jest and jsdom.
 
 #### 4. `blog1-browser.test.html` - Browser-based Tests for Blog Post
+
+Standalone HTML file for testing the blog post directly in a browser.
+
+### Blog2.html Tests
+
+#### 5. `blog2.test.js` - Jest-based Unit Tests for Blog Post
+
+Comprehensive test suite for "The Approaching Singularity: Reflections on Sam Altman's Vision" blog post using Jest and jsdom.
+
+#### 6. `blog2-browser.test.html` - Browser-based Tests for Blog Post
 
 Standalone HTML file for testing the blog post directly in a browser.
 
@@ -107,7 +117,7 @@ A standalone HTML file that can be opened directly in a browser to test the blog
 # Install dependencies
 npm install
 
-# Run all tests (both index.html and blog1.html)
+# Run all tests (index.html, blog1.html, and blog2.html)
 npm test
 
 # Run tests with coverage
@@ -208,6 +218,19 @@ PASS tests/blog1.test.js
     ...
 ```
 
+When running the Jest tests for blog2.html, you should see output similar to:
+
+```
+PASS tests/blog2.test.js
+  Blog2.html Unit Tests
+    HTML Structure and Meta Tags
+      ✓ should have proper DOCTYPE declaration
+      ✓ should have html element with lang attribute
+      ✓ should have proper meta tags
+      ✓ should have proper title
+    ...
+```
+
 ## Adding New Tests
 
 To add new tests:
@@ -229,3 +252,35 @@ When updating any HTML files, make sure to:
 2. Run tests to ensure no regressions
 3. Add new tests for any new functionality or content sections
 4. Create new test files for new HTML pages following the established patterns
+
+## Blog2.html Test Coverage
+
+### Structure Tests
+- ✅ Proper DOCTYPE declaration
+- ✅ HTML element with correct lang attribute
+- ✅ Required meta tags (charset, viewport)
+- ✅ Correct page title with blog post name
+
+### Content Tests
+- ✅ Header with back navigation link
+- ✅ Blog post title and meta information
+- ✅ "The Intelligence Age is Upon Us" main section
+- ✅ Introductory paragraph about Sam Altman's reflections
+- ✅ Quote section with Intelligence Age content
+- ✅ "What the Singularity Means for Product Development" section
+- ✅ List of three key insights (Non-Linear Acceleration, Democratization, Economic Paradigms)
+- ✅ "Preparing for the Transition" section
+- ✅ "The Human Element" section
+- ✅ Closing question about readiness
+- ✅ Footer with copyright information
+
+### Functionality Tests
+- ✅ Back link points to index.html
+- ✅ Proper heading hierarchy (h1, h2, h3)
+- ✅ Semantic HTML structure (header, main, footer)
+- ✅ CSS styling including quote styling and responsive design
+- ✅ AI and singularity topic validation
+
+### Accessibility Tests
+- ✅ Proper semantic HTML elements
+- ✅ Clear navigation structure
