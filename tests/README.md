@@ -208,6 +208,19 @@ PASS tests/blog1.test.js
     ...
 ```
 
+When running the Jest tests for blog2.html, you should see output similar to:
+
+```
+PASS tests/blog2.test.js
+  Blog2.html Unit Tests
+    HTML Structure and Meta Tags
+      ✓ should have proper DOCTYPE declaration
+      ✓ should have html element with lang attribute
+      ✓ should have proper meta tags
+      ✓ should have proper title
+    ...
+```
+
 ## Adding New Tests
 
 To add new tests:
