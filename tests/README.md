@@ -1,6 +1,6 @@
 # Unit Tests for Personal Website
 
-This directory contains comprehensive unit tests for Apurv Sibal's personal website, including tests for `index.html` and `blog1.html`.
+This directory contains comprehensive unit tests for Apurv Sibal's personal website, including tests for `index.html`, `blog1.html`, and `blog2.html`.
 
 ## Overview
 
@@ -25,6 +25,16 @@ Standalone HTML file for testing the homepage directly in a browser.
 Comprehensive test suite for the "Welcome to My Blog Journey" blog post using Jest and jsdom.
 
 #### 4. `blog1-browser.test.html` - Browser-based Tests for Blog Post
+
+Standalone HTML file for testing the blog post directly in a browser.
+
+### Blog2.html Tests
+
+#### 5. `blog2.test.js` - Jest-based Unit Tests for Blog Post
+
+Comprehensive test suite for "The Approaching Singularity: Reflections on Sam Altman's Vision" blog post using Jest and jsdom.
+
+#### 6. `blog2-browser.test.html` - Browser-based Tests for Blog Post
 
 Standalone HTML file for testing the blog post directly in a browser.
 
