@@ -1,20 +1,35 @@
 {
-  "name": "personal-website-tests",
+  "name": "apurv-sibal-personal-website",
   "version": "1.0.0",
-  "description": "Unit tests for Apurv Sibal's personal website",
+  "description": "Personal website for Apurv Sibal - Senior Product Manager at AWS",
+  "main": "index.html",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apurvsibal/personal_website.git"
+  },
+  "keywords": [
+    "personal-website",
+    "portfolio",
+    "product-manager",
+    "aws",
+    "ai",
+    "blog"
+  ],
+  "author": "Apurv Sibal",
+  "license": "MIT",
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
     "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
-    "@testing-library/jest-dom": "^6.1.4"
+    "jest-environment-jsdom": "^29.7.0"
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"]
-  },
-  "author": "Apurv Sibal"
+    "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"],
+    "testMatch": ["<rootDir>/tests/**/*.test.js"]
+  }
 }
