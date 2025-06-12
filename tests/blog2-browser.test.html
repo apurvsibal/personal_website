@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog2.html Unit Tests - Browser Version</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .test-summary {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #666;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog2.html Unit Tests</h1>
+    <div id="test-results"></div>
+    
+    <!-- Hidden iframe to load the blog2.html for testing -->
+    <iframe id="test-frame" src="../blog2.html" style="display: none;"></iframe>
+
+    <script>
+        class TestRunner {
+            constructor() {
+                this.tests = [];
+                this.passed = 0;
+                this.failed = 0;
+                this.resultsContainer = document.getElementById('test-results');
+            }
+
+            test(description, testFunction) {
+                this.tests.push({ description, testFunction });
+            }
+
+            async runTests() {
+                // Wait for iframe to load
+                await new Promise(resolve => {
+                    const iframe = document.getElementById('test-frame');
+                    iframe.onload = resolve;
+                });
+
+                const testDoc = document.getElementById('test-frame').contentDocument;
+                
+                for (const test of this.tests) {
+                    try {
+                        const result = test.testFunction(testDoc);
+                        this.addResult(test.description, true, result);
+                        this.passed++;
+                    } catch (error) {
+                        this.addResult(test.description, false, error.message);
+                        this.failed++;
+                    }
+                }
+
+                this.showSummary();
+            }
+
+            addResult(description, passed, message = '') {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `test-result ${passed ? 'pass' : 'fail'}`;
+                resultDiv.innerHTML = `
+                    <strong>${passed ? '✓' : '✗'} ${description}</strong>
+                    ${message ? `<br><small>${message}</small>` : ''}
+                `;
+                this.resultsContainer.appendChild(resultDiv);
+            }
+
+            showSummary() {
+                const summaryDiv = document.createElement('div');
+                summaryDiv.className = 'test-summary';
+                summaryDiv.innerHTML = `
+                    Test Summary: ${this.passed} passed, ${this.failed} failed, ${this.tests.length} total
+                `;
+                this.resultsContainer.insertBefore(summaryDiv, this.resultsContainer.firstChild);
+            }
+        }
+
+        const runner = new TestRunner();
+
+        // HTML Structure Tests
+        runner.test('Should have proper DOCTYPE and HTML structure', (doc) => {
+            const html = doc.documentElement;
+            if (!html || html.getAttribute('lang') !== 'en') {
+                throw new Error('HTML element missing or lang attribute incorrect');
+            }
+            return 'HTML structure is valid';
+        });
+
+        runner.test('Should have proper meta tags', (doc) => {
+            const charset = doc.querySelector('meta[charset="UTF-8"]');
+            const viewport = doc.querySelector('meta[name="viewport"]');
+            if (!charset || !viewport) {
+                throw new Error('Required meta tags are missing');
+            }
+            return 'Meta tags are present and correct';
+        });
+
+        runner.test('Should have correct title', (doc) => {
+            const title = doc.querySelector('title');
+            const expectedTitle = 'The Approaching Singularity: Reflections on Sam Altman\'s Vision - Apurv Sibal';
+            if (!title || title.textContent !== expectedTitle) {
+                throw new Error(`Expected title "${expectedTitle}", got "${title?.textContent}"`);
+            }
+            return 'Title is correct';
+        });
+
+        // Header Tests
+        runner.test('Should have header with back link', (doc) => {
+            const backLink = doc.querySelector('.back-link');
+            if (!backLink || backLink.getAttribute('href') !== 'index.html') {
+                throw new Error('Back link is missing or has incorrect href');
+            }
+            if (backLink.textContent !== 'Back to Home') {
+                throw new Error('Back link text is incorrect');
+            }
+            return 'Back link is correct';
+        });
+
+        runner.test('Should have proper blog post title', (doc) => {
+            const h1 = doc.querySelector('header h1');
+            const expectedTitle = 'The Approaching Singularity: Reflections on Sam Altman\'s Vision';
+            if (!h1 || h1.textContent !== expectedTitle) {
+                throw new Error('Blog post title is incorrect or missing');
+            }
+            return 'Blog post title is correct';
+        });
+
+        runner.test('Should have meta information with date and author', (doc) => {
+            const meta = doc.querySelector('.meta');
+            if (!meta || !meta.textContent.includes('June 11, 2025') || !meta.textContent.includes('Apurv Sibal')) {
+                throw new Error('Meta information is missing or incorrect');
+            }
+            return 'Meta information is correct';
+        });
+
+        // Content Tests
+        runner.test('Should have main content area', (doc) => {
+            const main = doc.querySelector('main');
+            const content = main?.querySelector('.content');
+            if (!main || !content) {
+                throw new Error('Main content area is missing');
+            }
+            return 'Main content area is present';
+        });
+
+        runner.test('Should have "The Intelligence Age is Upon Us" section', (doc) => {
+            const h2Elements = doc.querySelectorAll('h2');
+            const intelligenceAgeHeading = Array.from(h2Elements).find(h => h.textContent === 'The Intelligence Age is Upon Us');
+            if (!intelligenceAgeHeading) {
+                throw new Error('"The Intelligence Age is Upon Us" section is missing');
+            }
+            return '"The Intelligence Age is Upon Us" section is present';
+        });
+
+        runner.test('Should have introductory paragraph about Sam Altman', (doc) => {
+            const content = doc.querySelector('.content');
+            const firstParagraph = content?.querySelector('p');
+            if (!firstParagraph || 
+                !firstParagraph.textContent.includes('Sam Altman\'s recent reflections') ||
+                !firstParagraph.textContent.includes('technological singularity')) {
+                throw new Error('Introductory paragraph about Sam Altman is missing or incorrect');
+            }
+            return 'Introductory paragraph is correct';
+        });
+
+        runner.test('Should have quote section', (doc) => {
+            const quote = doc.querySelector('.quote');
+            if (!quote || 
+                !quote.textContent.includes('Intelligence Age') ||
+                !quote.textContent.includes('AI systems')) {
+                throw new Error('Quote section is missing or incorrect');
+            }
+            return 'Quote section is present and correct';
+        });
+
+        runner.test('Should have "What the Singularity Means for Product Development" section', (doc) => {
+            const h3Elements = doc.querySelectorAll('h3');
+            const productDevHeading = Array.from(h3Elements).find(h => h.textContent === 'What the Singularity Means for Product Development');
+            if (!productDevHeading) {
+                throw new Error('"What the Singularity Means for Product Development" section is missing');
+            }
+            return '"What the Singularity Means for Product Development" section is present';
+        });
+
+        runner.test('Should have list of key insights', (doc) => {
+            const list = doc.querySelector('.content ul');
+            const listItems = list?.querySelectorAll('li');
+            if (!list || listItems?.length !== 3) {
+                throw new Error(`Expected 3 list items, found ${listItems?.length || 0}`);
+            }
+            
+            const expectedInsights = [
+                'Acceleration is Non-Linear',
+                'Democratization of Intelligence',
+                'New Economic Paradigms'
+            ];
+            
+            for (let i = 0; i < listItems.length; i++) {
+                if (!listItems[i].textContent.includes(expectedInsights[i])) {
+                    throw new Error(`List item ${i + 1} content is incorrect`);
+                }
+            }
+            return 'Key insights list is correct';
+        });
+
+        runner.test('Should have "Preparing for the Transition" section', (doc) => {
+            const h3Elements = doc.querySelectorAll('h3');
+            const preparingHeading = Array.from(h3Elements).find(h => h.textContent === 'Preparing for the Transition');
+            if (!preparingHeading) {
+                throw new Error('"Preparing for the Transition" section is missing');
+            }
+            return '"Preparing for the Transition" section is present';
+        });
+
+        runner.test('Should have "The Human Element" section', (doc) => {
+            const h3Elements = doc.querySelectorAll('h3');
+            const humanElementHeading = Array.from(h3Elements).find(h => h.textContent === 'The Human Element');
+            if (!humanElementHeading) {
+                throw new Error('"The Human Element" section is missing');
+            }
+            return '"The Human Element" section is present';
+        });
+
+        runner.test('Should mention AWS and product decisions', (doc) => {
+            const content = doc.querySelector('.content');
+            const textContent = content?.textContent;
+            if (!textContent?.includes('AWS') || !textContent?.includes('product decision')) {
+                throw new Error('AWS and product decisions mention is missing');
+            }
+            return 'AWS and product decisions are mentioned';
+        });
+
+        runner.test('Should have closing question about readiness', (doc) => {
+            const content = doc.querySelector('.content');
+            const paragraphs = content?.querySelectorAll('p');
+            const lastParagraph = paragraphs?.[paragraphs.length - 1];
+            if (!lastParagraph || !lastParagraph.textContent.includes('are we ready to embrace it responsibly')) {
+                throw new Error('Closing question about readiness is missing');
+            }
+            return 'Closing question is present';
+        });
+
+        // Footer Tests
+        runner.test('Should have footer with copyright', (doc) => {
+            const footer = doc.querySelector('footer');
+            const copyright = footer?.querySelector('p');
+            if (!footer || !copyright || copyright.textContent !== '© 2025 Apurv Sibal') {
+                throw new Error('Footer copyright is missing or incorrect');
+            }
+            return 'Footer copyright is correct';
+        });
+
+        // Content Validation Tests
+        runner.test('Should contain key AI and singularity topics', (doc) => {
+            const content = doc.querySelector('.content');
+            const textContent = content?.textContent;
+            if (!textContent?.includes('singularity') || 
+                !textContent?.includes('AI') || 
+                !textContent?.includes('Intelligence Age') ||
+                !textContent?.includes('Sam Altman')) {
+                throw new Error('Key AI and singularity topics are missing');
+            }
+            return 'AI and singularity topics are present';
+        });
+
+        // Structure Tests
+        runner.test('Should have proper heading hierarchy', (doc) => {
+            const h1 = doc.querySelector('h1');
+            const h2Elements = doc.querySelectorAll('h2');
+            const h3Elements = doc.querySelectorAll('h3');
+            
+            if (!h1 || h2Elements.length !== 1 || h3Elements.length !== 3) {
+                throw new Error(`Expected 1 h1, 1 h2, and 3 h3 elements. Found: ${h1 ? 1 : 0} h1, ${h2Elements.length} h2, ${h3Elements.length} h3`);
+            }
+            return 'Heading hierarchy is correct';
+        });
+
+        // Run all tests when page loads
+        window.addEventListener('load', () => {
+            runner.runTests();
+        });
+    </script>
+</body>
+</html>
