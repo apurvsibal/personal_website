@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index.html Unit Tests - Browser Version</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .test-summary {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #666;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Index.html Unit Tests</h1>
+    <div id="test-results"></div>
+    
+    <!-- Hidden iframe to load the index.html for testing -->
+    <iframe id="test-frame" src="../index.html" style="display: none;"></iframe>
+
+    <script>
+        class TestRunner {
+            constructor() {
+                this.tests = [];
+                this.passed = 0;
+                this.failed = 0;
+                this.resultsContainer = document.getElementById('test-results');
+            }
+
+            test(description, testFunction) {
+                this.tests.push({ description, testFunction });
+            }
+
+            async runTests() {
+                // Wait for iframe to load
+                await new Promise(resolve => {
+                    const iframe = document.getElementById('test-frame');
+                    iframe.onload = resolve;
+                });
+
+                const testDoc = document.getElementById('test-frame').contentDocument;
+                
+                for (const test of this.tests) {
+                    try {
+                        const result = test.testFunction(testDoc);
+                        this.addResult(test.description, true, result);
+                        this.passed++;
+                    } catch (error) {
+                        this.addResult(test.description, false, error.message);
+                        this.failed++;
+                    }
+                }
+
+                this.showSummary();
+            }
+
+            addResult(description, passed, message = '') {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `test-result ${passed ? 'pass' : 'fail'}`;
+                resultDiv.innerHTML = `
+                    <strong>${passed ? '✓' : '✗'} ${description}</strong>
+                    ${message ? `<br><small>${message}</small>` : ''}
+                `;
+                this.resultsContainer.appendChild(resultDiv);
+            }
+
+            showSummary() {
+                const summaryDiv = document.createElement('div');
+                summaryDiv.className = 'test-summary';
+                summaryDiv.innerHTML = `
+                    Test Summary: ${this.passed} passed, ${this.failed} failed, ${this.tests.length} total
+                `;
+                this.resultsContainer.insertBefore(summaryDiv, this.resultsContainer.firstChild);
+            }
+        }
+
+        const runner = new TestRunner();
+
+        // HTML Structure Tests
+        runner.test('Should have proper DOCTYPE and HTML structure', (doc) => {
+            const html = doc.documentElement;
+            if (!html || html.getAttribute('lang') !== 'en') {
+                throw new Error('HTML element missing or lang attribute incorrect');
+            }
+            return 'HTML structure is valid';
+        });
+
+        runner.test('Should have proper meta tags', (doc) => {
+            const charset = doc.querySelector('meta[charset="UTF-8"]');
+            const viewport = doc.querySelector('meta[name="viewport"]');
+            if (!charset || !viewport) {
+                throw new Error('Required meta tags are missing');
+            }
+            return 'Meta tags are present and correct';
+        });
+
+        runner.test('Should have correct title', (doc) => {
+            const title = doc.querySelector('title');
+            if (!title || title.textContent !== 'Apurv Sibal') {
+                throw new Error(`Expected title "Apurv Sibal", got "${title?.textContent}"`);
+            }
+            return 'Title is correct';
+        });
+
+        // Header Tests
+        runner.test('Should have header with name and subtitle', (doc) => {
+            const h1 = doc.querySelector('header h1');
+            const subtitle = doc.querySelector('header p');
+            if (!h1 || h1.textContent !== 'Apurv Sibal') {
+                throw new Error('Header name is incorrect or missing');
+            }
+            if (!subtitle || !subtitle.textContent.includes('Senior Product Manager at AWS')) {
+                throw new Error('Header subtitle is incorrect or missing');
+            }
+            return 'Header content is correct';
+        });
+
+        // About Section Tests
+        runner.test('Should have about section', (doc) => {
+            const aboutSection = doc.querySelector('.intro');
+            const aboutHeading = aboutSection?.querySelector('h2');
+            if (!aboutSection || !aboutHeading || aboutHeading.textContent !== 'About') {
+                throw new Error('About section is missing or incorrect');
+            }
+            return 'About section is present';
+        });
+
+        // Experience Section Tests
+        runner.test('Should have three job experiences', (doc) => {
+            const jobs = doc.querySelectorAll('.job');
+            if (jobs.length !== 3) {
+                throw new Error(`Expected 3 jobs, found ${jobs.length}`);
+            }
+            return 'All job experiences are present';
+        });
+
+        runner.test('Should have AWS as current position', (doc) => {
+            const firstJob = doc.querySelector('.job');
+            const company = firstJob?.querySelector('.company');
+            if (!company || !company.textContent.includes('Amazon Web Services')) {
+                throw new Error('AWS job is not listed as first/current position');
+            }
+            return 'AWS position is correctly listed as current';
+        });
+
+        // Newsletter Tests
+        runner.test('Should have newsletter subscription form', (doc) => {
+            const form = doc.querySelector('.newsletter form');
+            const emailInput = form?.querySelector('input[type="email"]');
+            const submitButton = form?.querySelector('button[type="submit"]');
+            if (!form || !emailInput || !submitButton) {
+                throw new Error('Newsletter form is incomplete');
+            }
+            return 'Newsletter form is complete';
+        });
+
+        // Footer Tests
+        runner.test('Should have footer with social links', (doc) => {
+            const socialLinks = doc.querySelectorAll('.social-links a');
+            const linkedinLink = doc.querySelector('a[href="https://linkedin.com/in/apurvsibal"]');
+            if (socialLinks.length < 3 || !linkedinLink) {
+                throw new Error('Footer social links are incomplete');
+            }
+            return 'Footer social links are present';
+        });
+
+        runner.test('Should have copyright notice', (doc) => {
+            const copyright = doc.querySelector('footer p');
+            if (!copyright || !copyright.textContent.includes('2025 Apurv Sibal')) {
+                throw new Error('Copyright notice is missing or incorrect');
+            }
+            return 'Copyright notice is correct';
+        });
+
+        // Blog Posts Tests
+        runner.test('Should have blog posts with correct links', (doc) => {
+            const posts = doc.querySelectorAll('.post');
+            const blog1Link = doc.querySelector('a[href="blog1.html"]');
+            const blog2Link = doc.querySelector('a[href="blog2.html"]');
+            if (posts.length !== 2 || !blog1Link || !blog2Link) {
+                throw new Error('Blog posts are missing or have incorrect links');
+            }
+            return 'Blog posts and links are correct';
+        });
+
+        // Skills Section Tests
+        runner.test('Should have skills section with categories', (doc) => {
+            const skillCategories = doc.querySelectorAll('.skill-category');
+            if (skillCategories.length !== 3) {
+                throw new Error(`Expected 3 skill categories, found ${skillCategories.length}`);
+            }
+            return 'Skills section has correct number of categories';
+        });
+
+        // Education Section Tests
+        runner.test('Should have education section with degrees', (doc) => {
+            const educationItems = doc.querySelectorAll('.education-item');
+            const certifications = doc.querySelector('.certifications');
+            if (educationItems.length !== 2 || !certifications) {
+                throw new Error('Education section is incomplete');
+            }
+            return 'Education section is complete';
+        });
+
+        // Run all tests when page loads
+        window.addEventListener('load', () => {
+            runner.runTests();
+        });
+    </script>
+</body>
+</html>
